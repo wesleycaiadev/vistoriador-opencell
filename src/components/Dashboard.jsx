@@ -369,6 +369,7 @@ export default function Dashboard() {
                                             <th>Peça</th>
                                             <th>Modelo</th>
                                             <th>Ordem de Serviço</th>
+                                            <th>Técnico</th>
                                             <th>Classificação</th>
                                             <th style={{ textAlign: 'right' }}>Ações</th>
                                         </tr>
@@ -379,6 +380,9 @@ export default function Dashboard() {
                                                 <td>{vistoria.peca || '-'}</td>
                                                 <td>{vistoria.modelo || '-'}</td>
                                                 <td style={{ color: 'var(--gray-500)', fontFamily: 'monospace', fontSize: '13px' }}>{vistoria.os}</td>
+                                                <td style={{ fontSize: '13px', fontWeight: '500', color: 'var(--gray-700)' }}>
+                                                    {vistoria.tecnico || 'Não Informado'}
+                                                </td>
                                                 <td>{getStatusBadge(vistoria.status)}</td>
                                                 <td style={{ textAlign: 'right' }}>
                                                     <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
