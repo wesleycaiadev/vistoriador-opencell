@@ -192,9 +192,10 @@ export default function Dashboard() {
 
         return (
             <span style={{
-                backgroundColor: style.bg, color: style.color, padding: '4px 10px',
+                backgroundColor: style.bg, color: style.color, padding: '6px 12px',
                 borderRadius: '100px', fontSize: '11px', fontWeight: '800',
-                textTransform: 'uppercase', letterSpacing: '0.05em', display: 'inline-block'
+                textTransform: 'uppercase', letterSpacing: '0.05em', display: 'inline-flex',
+                alignItems: 'center', justifyContent: 'center', whiteSpace: 'nowrap', textAlign: 'center'
             }}>
                 {label}
             </span>
