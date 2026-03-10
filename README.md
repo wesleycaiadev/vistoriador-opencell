@@ -3,9 +3,6 @@
 Um sistema moderno, rápido e focado em UX (User Experience) desenvolvido para otimizar o processo de vistoria e controle de painéis Opencell em laboratórios e assistências técnicas.
 
 Com a identidade premium **MSCAJU Smart Center**, esta ferramenta foi projetada para substituir planilhas soltas e complexas por uma interface iterativa (Single Page Application) focada em gestão inteligente de dados, permitindo cadastro, visualização em tempo real e exportação de relatórios.
-
-![Dashboard Preview](https://via.placeholder.com/800x400.png?text=Vistoriador+Opencell+-+MSCAJU+Smart+Center)
-
 ## ✨ Principais Funcionalidades
 
 ### 📋 Registro e Controle
