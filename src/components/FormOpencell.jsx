@@ -4,6 +4,7 @@ import { addVistoria, getVistorias } from '../utils/storage';
 
 export default function FormOpencell() {
     const [formData, setFormData] = useState({
+        peca: '',
         modelo: '',
         os: '',
         data: new Date().toISOString().split('T')[0],
@@ -40,6 +41,7 @@ export default function FormOpencell() {
 
         setFormData(prev => ({
             ...prev,
+            peca: '',
             modelo: '',
             os: '',
             status: 'utilizado'
@@ -110,15 +112,28 @@ export default function FormOpencell() {
 
                 <form onSubmit={handleSubmit}>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 var(--spacing-xl)' }}>
-                        <div className="form-group" style={{ gridColumn: 'span 2' }}>
-                            <label htmlFor="modelo">Part Number / Modelo do Painel</label>
+                        <div className="form-group">
+                            <label htmlFor="peca">Part Number (Peça)</label>
+                            <input
+                                type="text"
+                                id="peca"
+                                name="peca"
+                                value={formData.peca}
+                                onChange={handleChange}
+                                placeholder="Ex: BN95-07223A"
+                                required
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="modelo">Modelo do Painel</label>
                             <input
                                 type="text"
                                 id="modelo"
                                 name="modelo"
                                 value={formData.modelo}
                                 onChange={handleChange}
-                                placeholder="Ex: BN95-07223A ou UN50TU8000"
+                                placeholder="Ex: UN50TU8000"
                                 required
                             />
                         </div>

@@ -42,8 +42,9 @@ export default function Dashboard() {
             return;
         }
 
-        const headers = ['Modelo', 'OS', 'Data', 'Técnico', 'Status'];
+        const headers = ['Peça', 'Modelo', 'OS', 'Data', 'Técnico', 'Status'];
         const data = vistorias.map(v => [
+            v.peca || '-',
             v.modelo,
             v.os,
             v.data ? new Date(v.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' }) : '',
@@ -52,7 +53,7 @@ export default function Dashboard() {
         ]);
 
         const ws = XLSX.utils.aoa_to_sheet([headers, ...data]);
-        ws['!cols'] = [{ wch: 25 }, { wch: 20 }, { wch: 15 }, { wch: 35 }, { wch: 30 }];
+        ws['!cols'] = [{ wch: 20 }, { wch: 20 }, { wch: 20 }, { wch: 15 }, { wch: 35 }, { wch: 30 }];
 
         const borderAll = {
             top: { style: 'thin', color: { rgb: "E5E5E5" } },
@@ -81,7 +82,7 @@ export default function Dashboard() {
                         alignment: { vertical: 'center', horizontal: 'center' }
                     };
                 }
-                else if (C === 4) {
+                else if (C === 5) {
                     const val = ws[cellRef].v;
                     let fgColor = "FFFFFF";
                     let fontColor = "0A1450";
@@ -120,6 +121,7 @@ export default function Dashboard() {
                 if (jsonData.length <= 1) return alert("Planilha vazia ou inválida.");
 
                 const headersRow = jsonData[0].map(h => String(h).toUpperCase().trim());
+                const idxPeca = headersRow.indexOf('PEÇA') !== -1 ? headersRow.indexOf('PEÇA') : headersRow.indexOf('PART NUMBER');
                 const idxModelo = headersRow.indexOf('MODELO');
                 const idxOs = headersRow.indexOf('OS');
                 const idxData = headersRow.indexOf('DATA');
@@ -129,7 +131,7 @@ export default function Dashboard() {
                 const parsedData = [];
                 for (let i = 1; i < jsonData.length; i++) {
                     const row = jsonData[i];
-                    if (!row || !row[idxModelo]) continue;
+                    if (!row || (!row[idxModelo] && !row[idxPeca])) continue;
 
                     let dataBruta = row[idxData];
                     if (typeof dataBruta === 'number') {
@@ -142,6 +144,7 @@ export default function Dashboard() {
                     if (s.includes('SOBRA') || s.includes('VISTORIA') || s.includes('ROTA') || s.includes('NÃO') || s.includes('DEVOLVIDO')) st = 'devolvido';
 
                     parsedData.push({
+                        peca: idxPeca !== -1 ? String(row[idxPeca] || '') : '',
                         modelo: String(row[idxModelo] || ''),
                         os: String(row[idxOs] || ''),
                         data: dataBruta || new Date().toISOString().split('T')[0],
@@ -223,9 +226,15 @@ export default function Dashboard() {
                         </button>
                         <h3 style={{ marginBottom: '24px' }}>Editar Vistoria (OS: {editingVistoria.os})</h3>
                         <form onSubmit={handleEditSave}>
-                            <div className="form-group">
-                                <label>Modelo</label>
-                                <input type="text" value={editingVistoria.modelo} onChange={(e) => setEditingVistoria({ ...editingVistoria, modelo: e.target.value })} required />
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginBottom: '16px' }}>
+                                <div className="form-group" style={{ marginBottom: 0 }}>
+                                    <label>Peça</label>
+                                    <input type="text" value={editingVistoria.peca || ''} onChange={(e) => setEditingVistoria({ ...editingVistoria, peca: e.target.value })} required />
+                                </div>
+                                <div className="form-group" style={{ marginBottom: 0 }}>
+                                    <label>Modelo</label>
+                                    <input type="text" value={editingVistoria.modelo || ''} onChange={(e) => setEditingVistoria({ ...editingVistoria, modelo: e.target.value })} required />
+                                </div>
                             </div>
                             <div className="form-group">
                                 <label>Técnico</label>
@@ -357,7 +366,8 @@ export default function Dashboard() {
                                 <table className="data-table">
                                     <thead>
                                         <tr>
-                                            <th>Part / Model</th>
+                                            <th>Peça</th>
+                                            <th>Modelo</th>
                                             <th>Ordem de Serviço</th>
                                             <th>Classificação</th>
                                             <th style={{ textAlign: 'right' }}>Ações</th>
@@ -366,7 +376,8 @@ export default function Dashboard() {
                                     <tbody>
                                         {displayedVistorias.map((vistoria) => (
                                             <tr key={vistoria.id}>
-                                                <td>{vistoria.modelo}</td>
+                                                <td>{vistoria.peca || '-'}</td>
+                                                <td>{vistoria.modelo || '-'}</td>
                                                 <td style={{ color: 'var(--gray-500)', fontFamily: 'monospace', fontSize: '13px' }}>{vistoria.os}</td>
                                                 <td>{getStatusBadge(vistoria.status)}</td>
                                                 <td style={{ textAlign: 'right' }}>
