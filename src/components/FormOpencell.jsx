@@ -126,7 +126,7 @@ export default function FormOpencell() {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="modelo">Modelo do Painel</label>
+                            <label htmlFor="modelo">Modelo do Produto</label>
                             <input
                                 type="text"
                                 id="modelo"
