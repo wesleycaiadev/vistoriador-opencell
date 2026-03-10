@@ -1,16 +1,75 @@
-# React + Vite
+# Vistoriador Opencell - MSCAJU Smart Center 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Um sistema moderno, rápido e focado em UX (User Experience) desenvolvido para otimizar o processo de vistoria e controle de painéis Opencell em laboratórios e assistências técnicas.
 
-Currently, two official plugins are available:
+Com a identidade premium **MSCAJU Smart Center**, esta ferramenta foi projetada para substituir planilhas soltas e complexas por uma interface iterativa (Single Page Application) focada em gestão inteligente de dados, permitindo cadastro, visualização em tempo real e exportação de relatórios.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![Dashboard Preview](https://via.placeholder.com/800x400.png?text=Vistoriador+Opencell+-+MSCAJU+Smart+Center)
 
-## React Compiler
+## ✨ Principais Funcionalidades
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 📋 Registro e Controle
+- **Ficha Técnica Completa:** Cadastro do "Part Number / Modelo", "Ordem de Serviço (O.S)", "Técnico Responsável", "Data" e "Classificação".
+- **Sistema de Status:** Classificação visual automática (`USADO COM SUCESSO`, `VISTORIA (VOLTOU DE ROTA)`, `DEFEITO DE FÁBRICA`).
+- **Prevenção de Erros:** Bloqueio e alerta visual ao tentar cadastrar uma mesma O.S duplicada.
 
-## Expanding the ESLint configuration
+### 📊 Inteligência & Analytics (Dashboard)
+- **Métricas ao Vivo:** Cartões superiores que contabilizam automaticamente o volume total de entradas, índice de sucessos e falhas.
+- **Gráficos de Tendência:** Gráfico de barras rankeando os "Top 5 Modelos" mais movimentados no laboratório.
+- **Tabela Interativa:** Feed cronológico com filtro de status, além de botões interativos para **Editar** ou **Deletar** registros com erros. Paginação otimizada.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🔄 Integração com Excel
+- **Exportação (Download Mestre):** Geração automática de relatórios `.xlsx` em 1 clique, com largura de colunas otimizada, cabeçalhos na cor corporativa (Azul Samsung) e formatação de texto.
+- **Importação Direta:** Possibilidade de subir uma planilha Excel legada para o sistema e ter os gráficos desenhados retroativamente em segundos.
+
+### 🎓 Tutorial de Onboarding
+- Os usuários novatos que acessarem pela primeira vez receberão um *Tour Interativo* guiado tela-a-tela ensinando a operabilidade básica do sistema de forma autônoma.
+
+## 🛠️ Tecnologias Utilizadas
+
+A aplicação foi construída visando performance local (Client-Side) usando infraestrutura moderna de Front-End:
+
+- **ReactJS (Vite):** Biblioteca core para construção unificada de interfaces dinâmicas (SPA).
+- **Lucide React:** Biblioteca oficial de ícones minimalistas.
+- **Recharts:** Motor gráfico matemático usado para as estatísticas e rankings visuais.
+- **React Joyride:** Responsável pelo Tooltip de Onboarding e guias de primeiros passos reais.
+- **XLSX-js-style:** Processador de arrays que converte a base de dados interna direto em planilhas Microsoft Excel fortemente estilizadas.
+- **Vanilla CSS:** Folhas de estilo construídas do zero utilizando *CSS Variables* focadas no *Design System Samsung* (Azuis e Cinzas Escuros), glassmorphism avançado, com sombras orgânicas e micro-interações sem depender de pesados frameworks externos.
+- **LocalStorage API:** Toda a base de dados reside na memória de cache do navegador do usuário, provendo latência zero de persistência de informação.
+
+## 📦 Como Rodar Localmente
+
+Certifique-se de ter o [Node.js](https://nodejs.org/) instalado em sua máquina.
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/wesleycaiadev/vistoriador-opencell.git
+```
+
+2. Acesse a pasta do projeto:
+```bash
+cd "vistoriador de opencell"
+```
+
+3. Instale as dependências:
+```bash
+npm install
+```
+
+4. Execute o servidor de desenvolvimento:
+```bash
+npm run dev
+```
+
+5. O aplicativo ficará disponível no seu navegador em `http://localhost:5173`.
+
+## 🎨 Design UX/UI
+
+O layout adere ao padrão sênior de experiência do usuário aplicado nas áreas corporativas. Foram adotadas práticas minimalistas, alto contraste nos botões e validações visuais em tempo real por *toasts* elegantes. A paleta segue as *guidelines* de "Service Center", combinando:
+
+- **Primary:** Samsung Blue (`#1428A0`)
+- **Surface:** Glassmorphic Whites (`#FFFFFF` com bordas suaves e caudas flutuantes)
+- **Status:** Verde (Usado), Vermelho (Defeito), Laranja-Amarelado (Vistoria de Rota).
+
+---
+*Desenvolvido exclusivamente para MSCAJU Smart Center.*
