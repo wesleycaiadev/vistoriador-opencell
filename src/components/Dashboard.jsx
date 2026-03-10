@@ -49,7 +49,7 @@ export default function Dashboard() {
             v.os,
             v.data ? new Date(v.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' }) : '',
             v.tecnico,
-            v.status === 'utilizado' ? 'USADO COM SUCESSO' : v.status === 'devolvido' ? 'VISTORIA (VOLTOU DE ROTA)' : 'DEFEITO DE FÁBRICA'
+            v.status === 'utilizado' ? 'USADO COM SUCESSO' : v.status === 'devolvido' ? 'VISTORIA' : 'DEFEITO DE FÁBRICA'
         ]);
 
         const ws = XLSX.utils.aoa_to_sheet([headers, ...data]);
@@ -187,7 +187,7 @@ export default function Dashboard() {
         const style = colors[status] || colors.utilizado;
 
         let label = 'USADO';
-        if (status === 'devolvido') label = 'VISTORIA (VOLTOU DE ROTA)';
+        if (status === 'devolvido') label = 'VISTORIA';
         if (status === 'defeito') label = 'DEFEITO';
 
         return (
