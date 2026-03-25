@@ -1,0 +1,36 @@
+/* Skeleton Loader - Pulsação Premium */
+@keyframes skeleton-pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 0.3; }
+  100% { opacity: 0.6; }
+}
+
+.ui-skeleton {
+  background-color: var(--surface-hover);
+  border-radius: var(--radius-sm);
+  animation: skeleton-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.ui-skeleton-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+  background-color: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+}
+
+.ui-skeleton-card-icon .ui-skeleton {
+  border-radius: var(--radius-md);
+}
+
+.ui-skeleton-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.ui-skeleton-row td {
+  padding: var(--space-md) !important;
+}

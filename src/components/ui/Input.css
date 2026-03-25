@@ -1,0 +1,35 @@
+.ui-input {
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  padding: 0 var(--space-md);
+  height: 44px; /* Emparelha com size-md do Button */
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm); /* Sharp pro max geometry */
+  font-size: var(--font-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  background-color: var(--surface-background); /* Fundo escuro real */
+  transition: var(--transition-fast);
+  outline: none;
+  width: 100%;
+}
+
+.ui-input::placeholder {
+  color: var(--text-muted);
+}
+
+.ui-input:hover {
+  background-color: var(--surface-hover);
+  border-color: var(--text-muted);
+}
+
+.ui-input:focus {
+  background-color: var(--surface-background);
+  border-color: var(--color-primary); /* Foco usando Tech Green */
+  box-shadow: 0 0 0 1px var(--color-primary);
+}
+
+.ui-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--surface-hover);
+}

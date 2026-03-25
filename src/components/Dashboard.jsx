@@ -3,6 +3,7 @@ import { Download, Upload, Inbox, Activity, CheckCircle, AlertTriangle, Filter, 
 import { getVistorias, importVistorias, deleteVistoria, updateVistoria } from '../utils/storage';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Cell } from 'recharts';
 import * as XLSX from 'xlsx-js-style';
+import { Badge } from './ui';
 
 export default function Dashboard() {
     const [vistorias, setVistorias] = useState([]);
@@ -179,26 +180,21 @@ export default function Dashboard() {
     };
 
     const getStatusBadge = (status) => {
-        const colors = {
-            utilizado: { bg: 'var(--status-danger-bg)', color: 'var(--status-danger)' },
-            devolvido: { bg: 'var(--status-warning-bg)', color: '#D49B00' },
-            defeito: { bg: 'var(--status-danger-bg)', color: 'var(--status-danger)' }
+        const variantMap = {
+            utilizado: 'danger',
+            devolvido: 'warning',
+            defeito: 'danger'
         };
-        const style = colors[status] || colors.utilizado;
-
-        let label = 'USADO';
-        if (status === 'devolvido') label = 'VISTORIA';
-        if (status === 'defeito') label = 'DEFEITO';
+        const labelMap = {
+            utilizado: 'USADO',
+            devolvido: 'VISTORIA',
+            defeito: 'DEFEITO'
+        };
 
         return (
-            <span style={{
-                backgroundColor: style.bg, color: style.color, padding: '6px 12px',
-                borderRadius: '100px', fontSize: '11px', fontWeight: '800',
-                textTransform: 'uppercase', letterSpacing: '0.05em', display: 'inline-flex',
-                alignItems: 'center', justifyContent: 'center', whiteSpace: 'nowrap', textAlign: 'center'
-            }}>
-                {label}
-            </span>
+            <Badge variant={variantMap[status] || 'default'}>
+                {labelMap[status] || 'USADO'}
+            </Badge>
         );
     };
 
@@ -215,13 +211,13 @@ export default function Dashboard() {
             {editingVistoria && (
                 <div style={{
                     position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
-                    backgroundColor: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)',
+                    backgroundColor: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(8px)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000
                 }}>
                     <div className="glass-card animate-fade-in" style={{ width: '100%', maxWidth: '500px', margin: '20px', position: 'relative' }}>
                         <button
                             onClick={() => setEditingVistoria(null)}
-                            style={{ position: 'absolute', top: '16px', right: '16px', background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--gray-500)' }}
+                            style={{ position: 'absolute', top: '16px', right: '16px', background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--text-secondary)' }}
                         >
                             <X size={24} />
                         </button>
@@ -277,7 +273,7 @@ export default function Dashboard() {
 
             {vistorias.length === 0 ? (
                 <div className="glass-card" style={{ textAlign: 'center', padding: '80px 24px' }}>
-                    <div style={{ background: 'var(--gray-100)', width: '80px', height: '80px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto var(--spacing-lg)' }}>
+                    <div style={{ background: 'var(--surface-hover)', width: '72px', height: '72px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto var(--space-lg)' }}>
                         <Inbox size={40} color="var(--gray-500)" />
                     </div>
                     <h3 style={{ fontSize: '24px', marginBottom: '8px' }}>Base de dados limpa</h3>
@@ -289,32 +285,32 @@ export default function Dashboard() {
                 <>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--spacing-lg)', marginBottom: 'var(--spacing-2xl)' }}>
                         <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-                            <div style={{ background: 'var(--gray-100)', padding: '16px', borderRadius: '16px' }}>
-                                <Activity size={32} color="var(--samsung-blue)" />
+                            <div style={{ background: 'rgba(20, 40, 160, 0.12)', padding: '14px', borderRadius: 'var(--radius-md)' }}>
+                                <Activity size={28} color="var(--color-primary)" />
                             </div>
                             <div>
-                                <p className="text-muted" style={{ fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '800', marginBottom: '4px' }}>Volume Total</p>
-                                <h3 style={{ fontSize: '36px', color: 'var(--samsung-blue)', fontFamily: 'var(--font-display)' }}>{total}</h3>
+                                <p className="text-muted" style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: '700', marginBottom: '4px' }}>Volume Total</p>
+                                <h3 style={{ fontSize: '32px', color: 'var(--color-primary)', fontFamily: 'var(--font-display)' }}>{total}</h3>
                             </div>
                         </div>
 
                         <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-                            <div style={{ background: 'var(--status-success-bg)', padding: '16px', borderRadius: '16px' }}>
-                                <CheckCircle size={32} color="var(--status-success)" />
+                            <div style={{ background: 'var(--status-success-bg)', padding: '14px', borderRadius: 'var(--radius-md)' }}>
+                                <CheckCircle size={28} color="var(--color-success)" />
                             </div>
                             <div>
-                                <p className="text-muted" style={{ fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '800', marginBottom: '4px' }}>Aproveitamento</p>
-                                <h3 style={{ fontSize: '36px', color: 'var(--status-success)', fontFamily: 'var(--font-display)' }}>{utilizados}</h3>
+                                <p className="text-muted" style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: '700', marginBottom: '4px' }}>Aproveitamento</p>
+                                <h3 style={{ fontSize: '32px', color: 'var(--color-success)', fontFamily: 'var(--font-display)' }}>{utilizados}</h3>
                             </div>
                         </div>
 
                         <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-                            <div style={{ background: 'var(--status-danger-bg)', padding: '16px', borderRadius: '16px' }}>
-                                <AlertTriangle size={32} color="var(--status-danger)" />
+                            <div style={{ background: 'var(--status-danger-bg)', padding: '14px', borderRadius: 'var(--radius-md)' }}>
+                                <AlertTriangle size={28} color="var(--color-danger)" />
                             </div>
                             <div>
-                                <p className="text-muted" style={{ fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '800', marginBottom: '4px' }}>Incidência de Falhas</p>
-                                <h3 style={{ fontSize: '36px', color: 'var(--status-danger)', fontFamily: 'var(--font-display)' }}>{defeitos}</h3>
+                                <p className="text-muted" style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: '700', marginBottom: '4px' }}>Incidência de Falhas</p>
+                                <h3 style={{ fontSize: '32px', color: 'var(--color-danger)', fontFamily: 'var(--font-display)' }}>{defeitos}</h3>
                             </div>
                         </div>
                     </div>
@@ -325,17 +321,18 @@ export default function Dashboard() {
                             <div style={{ height: '340px' }}>
                                 <ResponsiveContainer width="100%" height="100%">
                                     <BarChart data={chartData} margin={{ top: 20, right: 30, bottom: 5, left: -20 }}>
-                                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(0,0,0,0.05)" />
+                                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.06)" />
                                         <XAxis dataKey="name" axisLine={false} tickLine={false} style={{ fontSize: '12px', fontWeight: '600', fill: 'var(--gray-500)' }} dy={10} />
                                         <YAxis axisLine={false} tickLine={false} style={{ fontSize: '12px', fontWeight: '600', fill: 'var(--gray-500)' }} />
                                         <Tooltip
-                                            cursor={{ fill: 'rgba(20, 40, 160, 0.04)' }}
-                                            contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: 'var(--shadow-lg)', fontWeight: '600', padding: '16px' }}
+                                            cursor={{ fill: 'rgba(20, 40, 160, 0.06)' }}
+                                            contentStyle={{ borderRadius: 'var(--radius-md)', border: '1px solid var(--surface-border)', boxShadow: 'var(--shadow-lg)', fontWeight: '600', padding: '14px', background: 'var(--surface-card)', color: 'var(--text-primary)' }}
+                                            labelStyle={{ color: 'var(--text-secondary)' }}
                                         />
                                         <Bar dataKey="Quantidade" radius={[8, 8, 0, 0]} maxBarSize={48}>
                                             {
                                                 chartData.map((entry, index) => (
-                                                    <Cell key={`cell-${index}`} fill={index === 0 ? 'var(--samsung-blue)' : 'var(--samsung-blue-glow)'} />
+                                                    <Cell key={`cell-${index}`} fill={index === 0 ? 'var(--color-primary)' : 'rgba(20, 40, 160, 0.3)'} />
                                                 ))
                                             }
                                         </Bar>
@@ -345,13 +342,13 @@ export default function Dashboard() {
                         </div>
 
                         <div className="glass-card" style={{ padding: '0', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-                            <div style={{ padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #EAECEF' }}>
+                            <div style={{ padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--surface-border)' }}>
                                 <h3 style={{ fontSize: '20px' }}>Feed de Movimentações</h3>
 
                                 <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
                                     <Filter size={16} color="var(--gray-500)" />
                                     <select
-                                        style={{ padding: '8px 12px', fontSize: '12px', borderRadius: '100px', height: 'auto', backgroundPosition: 'right 8px center' }}
+                                        style={{ padding: '8px 12px', fontSize: '12px', borderRadius: 'var(--radius-sm)', height: 'auto', backgroundPosition: 'right 8px center' }}
                                         value={filterStatus}
                                         onChange={(e) => setFilterStatus(e.target.value)}
                                     >
@@ -380,8 +377,8 @@ export default function Dashboard() {
                                             <tr key={vistoria.id}>
                                                 <td>{vistoria.peca || '-'}</td>
                                                 <td>{vistoria.modelo || '-'}</td>
-                                                <td style={{ color: 'var(--gray-500)', fontFamily: 'monospace', fontSize: '13px' }}>{vistoria.os}</td>
-                                                <td style={{ fontSize: '13px', fontWeight: '500', color: 'var(--gray-700)' }}>
+                                                <td style={{ color: 'var(--text-muted)', fontFamily: 'monospace', fontSize: '13px' }}>{vistoria.os}</td>
+                                                <td style={{ fontSize: '13px', fontWeight: '500', color: 'var(--text-secondary)' }}>
                                                     {vistoria.tecnico || 'Não Informado'}
                                                 </td>
                                                 <td>{getStatusBadge(vistoria.status)}</td>
@@ -390,7 +387,7 @@ export default function Dashboard() {
                                                         <button
                                                             onClick={() => setEditingVistoria(vistoria)}
                                                             className="btn-secondary"
-                                                            style={{ padding: '8px', height: 'auto', minWidth: 'auto', borderRadius: '8px' }}
+                                                            style={{ padding: '8px', height: 'auto', minWidth: 'auto', borderRadius: 'var(--radius-sm)' }}
                                                             title="Editar Vistoria"
                                                         >
                                                             <Edit2 size={16} />
@@ -398,10 +395,10 @@ export default function Dashboard() {
                                                         <button
                                                             onClick={() => handleDelete(vistoria.id)}
                                                             className="btn-secondary"
-                                                            style={{ padding: '8px', height: 'auto', minWidth: 'auto', borderRadius: '8px', color: 'var(--status-danger)' }}
+                                                            style={{ padding: '8px', height: 'auto', minWidth: 'auto', borderRadius: 'var(--radius-sm)', color: 'var(--color-danger)' }}
                                                             title="Deletar Vistoria"
                                                         >
-                                                            <Trash2 size={16} color="var(--status-danger)" />
+                                                            <Trash2 size={16} color="var(--color-danger)" />
                                                         </button>
                                                     </div>
                                                 </td>
@@ -416,7 +413,7 @@ export default function Dashboard() {
                                 )}
                             </div>
 
-                            <div style={{ padding: '16px', display: 'flex', justifyContent: 'center', background: '#FAFAFC', borderTop: '1px solid #EAECEF' }}>
+                            <div style={{ padding: '14px', display: 'flex', justifyContent: 'center', background: 'rgba(255,255,255,0.02)', borderTop: '1px solid var(--surface-border)' }}>
                                 {filteredVistorias.length > 5 && (
                                     <button
                                         onClick={() => setShowAll(!showAll)}

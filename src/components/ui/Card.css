@@ -1,0 +1,15 @@
+.ui-card {
+  background-color: var(--surface-card);
+  border-radius: var(--radius-md); /* Sharp corners */
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-sm); /* Sombras sólidas em vez de blur */
+  border: 1px solid var(--surface-border);
+  transition: var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.ui-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: rgba(255, 255, 255, 0.15); /* microinteração sutil */
+}

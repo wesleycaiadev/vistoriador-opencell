@@ -60,13 +60,50 @@ npm run dev
 
 5. O aplicativo ficará disponível no seu navegador em `http://localhost:5173`.
 
-## 🎨 Design UX/UI
+## 🏗️ Arquitetura e Design System
 
-O layout adere ao padrão sênior de experiência do usuário aplicado nas áreas corporativas. Foram adotadas práticas minimalistas, alto contraste nos botões e validações visuais em tempo real por *toasts* elegantes. A paleta segue as *guidelines* de "Service Center", combinando:
+### Design Tokens (Fonte da Verdade)
 
-- **Primary:** Samsung Blue (`#1428A0`)
-- **Surface:** Glassmorphic Whites (`#FFFFFF` com bordas suaves e caudas flutuantes)
-- **Status:** Verde (Usado), Vermelho (Defeito), Laranja-Amarelado (Vistoria de Rota).
+Todos os valores visuais do projeto são controlados por **variáveis CSS semânticas** centralizadas em `src/styles/tokens.css`. Nenhuma cor, espaçamento ou borda é definida diretamente nos componentes — tudo referencia os tokens globais.
+
+```
+tokens.css
+├── Cores Semânticas    → --surface-*, --text-*, --color-primary
+├── Escala de Espaço    → --space-xs até --space-2xl (4px–48px)
+├── Tipografia          → --font-xs até --font-3xl (12px–32px)
+├── Bordas (Sharp)      → --radius-sm (2px), --radius-md (4px)
+└── Sombras de Elevação → --shadow-sm, --shadow-md, --shadow-lg
+```
+
+**Por que tokens?** Garante consistência visual em toda a aplicação. Mudar o tom de uma cor primária, por exemplo, afeta automaticamente todos os botões, badges e inputs — sem buscar valores espalhados.
+
+### Componentes UI Isolados (`src/components/ui/`)
+
+A interface é construída com **componentes "burros"** (presentational components) que só cuidam do visual, recebendo dados via `props`:
+
+| Componente | Variantes | Propósito |
+|---|---|---|
+| `<Button>` | `primary`, `secondary`, `danger`, `outline` | Ações do usuário |
+| `<Badge>` | `success`, `danger`, `warning`, `info` | Status e classificações |
+| `<Card>` | — | Container de elevação sólida |
+| `<Input>` | — | Campo de entrada padronizado |
+| `<Skeleton>` | `SkeletonCard`, `SkeletonRow` | Feedback de carregamento |
+
+**Exemplo de uso:**
+```jsx
+<Badge variant="success">Aprovado</Badge>
+<Button variant="danger" size="sm">Excluir</Button>
+```
+
+### Decisões Técnicas
+
+| Decisão | Justificativa |
+|---|---|
+| **Sem Glassmorphism** | `backdrop-filter` em fundo sólido não produz efeito real. Substituído por elevação com cores sólidas e bordas sutis (`1px solid rgba(255,255,255,0.08)`). |
+| **Border-radius Sharp (2-4px)** | Estética técnica e profissional. Evita o visual "genérico" de cantos muito arredondados. |
+| **`:focus-visible`** | Acessibilidade: ring de foco aparece apenas na navegação por teclado, não no clique. |
+| **Skeleton Loaders** | UX premium: blocos pulsantes no carregamento em vez de texto "Carregando...". |
+| **CSS Vanilla + Tokens** | Máximo controle sem dependência de frameworks CSS externos. |
 
 ---
 *Desenvolvido exclusivamente para MSCAJU Smart Center.*

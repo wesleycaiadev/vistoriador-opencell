@@ -1,0 +1,71 @@
+/* src/styles/tokens.css */
+
+:root {
+  /* =========================================
+     1. CORES SEMÂNTICAS (Tema Escuro "Pro Max") 
+     ========================================= */
+  
+  /* Cores de Superfície - Fim do glassmorphism, uso de elevação sólida */
+  --surface-background: #0f1115; /* Extremely dark, slightly cool tint */
+  --surface-card: #16181C; /* Elevated surface that stands out against background */
+  --surface-hover: #1F2228;
+  --surface-border: rgba(255, 255, 255, 0.08); /* Subtle crisp border */
+
+  /* Cores de Texto */
+  --text-primary: #FFFFFF;
+  --text-secondary: #9CA3AF; /* Gray 400 */
+  --text-muted: #6B7280;     /* Gray 500 */
+
+  /* Cores de Marca / Ação — Samsung Blue (Identidade Visual) */
+  --color-primary: #1428A0;       /* Samsung Blue */
+  --color-primary-hover: #2B45E8; 
+  --color-primary-active: #0F1F7A;
+
+  /* Estados e Feedback */
+  --color-success: #10B981;
+  --color-danger: #F43F5E;  /* Rose-ish vivid red */
+  --color-warning: #F59E0B; /* Amber */
+  --color-info:    #3B82F6; /* Standard strict blue if needed for technical info */
+
+  /* =========================================
+     2. ESCALAS DE ESPAÇAMENTO
+     ========================================= */
+  --space-xs: 0.25rem;  /* 4px */
+  --space-sm: 0.5rem;   /* 8px */
+  --space-md: 1rem;     /* 16px */
+  --space-lg: 1.5rem;   /* 24px */
+  --space-xl: 2rem;     /* 32px */
+  --space-2xl: 3rem;    /* 48px */
+
+  /* =========================================
+     3. TIPOGRAFIA (Base Inter ou System)
+     ========================================= */
+  --font-xs: 0.75rem;   /* 12px */
+  --font-sm: 0.875rem;  /* 14px */
+  --font-md: 1rem;      /* 16px */
+  --font-lg: 1.125rem;  /* 18px */
+  --font-xl: 1.25rem;   /* 20px */
+  --font-2xl: 1.5rem;   /* 24px */
+  --font-3xl: 2rem;     /* 32px */
+
+  /* =========================================
+     4. BORDAS, SOMBRAS E MICROINTERAÇÕES
+     ========================================= */
+  
+  /* Bordas "Pro Max" - Extremismo e Sharpness
+     Em vez do redondo padrão (8-16px), usamos bem afiado ou levemente curvado 
+     (2-4px) para dar aspecto super técnico e sério. */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px; /* Somente para modais ou elementos soltos da tela */
+  --radius-full: 9999px;
+
+  /* Sombras Sólidas (Substituindo o desfoque inútil) */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+
+  /* Transições e Estado */
+  --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}

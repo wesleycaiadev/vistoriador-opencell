@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Save, CheckCircle2, ClipboardSignature, AlertTriangle } from 'lucide-react';
 import { addVistoria, getVistorias } from '../utils/storage';
+import { CameraScanner } from './ui/CameraScanner';
 
 export default function FormOpencell() {
     const [formData, setFormData] = useState({
@@ -39,13 +40,14 @@ export default function FormOpencell() {
         setShowSuccess(true);
         setTimeout(() => setShowSuccess(false), 4000);
 
-        setFormData(prev => ({
-            ...prev,
+        setFormData({
             peca: '',
             modelo: '',
             os: '',
+            data: new Date().toISOString().split('T')[0],
+            tecnico: '',
             status: 'utilizado'
-        }));
+        });
     };
 
     return (
@@ -60,14 +62,14 @@ export default function FormOpencell() {
                 opacity: showError ? 1 : 0,
                 pointerEvents: showError ? 'auto' : 'none',
                 transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-                backgroundColor: 'var(--status-danger)',
+                backgroundColor: 'var(--color-danger)',
                 color: 'white',
                 padding: '14px 28px',
-                borderRadius: '100px',
+                borderRadius: 'var(--radius-sm)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '12px',
-                boxShadow: '0 12px 32px rgba(255,51,51,0.3)',
+                boxShadow: '0 12px 32px rgba(244,63,94,0.3)',
                 zIndex: 51
             }}>
                 <AlertTriangle size={20} color="white" />
@@ -83,14 +85,14 @@ export default function FormOpencell() {
                 opacity: showSuccess ? 1 : 0,
                 pointerEvents: showSuccess ? 'auto' : 'none',
                 transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-                backgroundColor: 'var(--samsung-gray-900)',
+                backgroundColor: 'var(--surface-card)',
                 color: 'white',
                 padding: '14px 28px',
-                borderRadius: '100px',
+                borderRadius: 'var(--radius-sm)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '12px',
-                boxShadow: '0 12px 32px rgba(0,0,0,0.2)',
+                boxShadow: 'var(--shadow-lg)',
                 zIndex: 50
             }}>
                 <CheckCircle2 size={20} color="var(--status-success)" />
@@ -98,8 +100,8 @@ export default function FormOpencell() {
             </div>
 
             <div className="glass-card animate-fade-in" style={{ padding: 'var(--spacing-xl) var(--spacing-2xl)' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: 'var(--spacing-2xl)' }}>
-                    <div style={{ background: 'var(--primary-gradient)', padding: '12px', borderRadius: '16px', boxShadow: 'var(--shadow-glow)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: 'var(--space-2xl)' }}>
+                    <div style={{ background: 'linear-gradient(135deg, var(--color-primary), #0F1F7A)', padding: '12px', borderRadius: 'var(--radius-md)', boxShadow: '0 0 20px rgba(20,40,160,0.4)' }}>
                         <ClipboardSignature size={28} color="white" />
                     </div>
                     <div>
@@ -114,15 +116,19 @@ export default function FormOpencell() {
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0 var(--spacing-xl)' }}>
                         <div className="form-group">
                             <label htmlFor="peca">Part Number (Peça)</label>
-                            <input
-                                type="text"
-                                id="peca"
-                                name="peca"
-                                value={formData.peca}
-                                onChange={handleChange}
-                                placeholder="Ex: BN95-07223A"
-                                required
-                            />
+                            <div style={{ display: 'flex', gap: 'var(--space-sm)' }}>
+                                <input
+                                    type="text"
+                                    id="peca"
+                                    name="peca"
+                                    value={formData.peca}
+                                    onChange={handleChange}
+                                    placeholder="Ex: BN96-07223A"
+                                    required
+                                    style={{ flex: 1 }}
+                                />
+                                <CameraScanner onCodeDetected={(code) => setFormData(prev => ({ ...prev, peca: code }))} />
+                            </div>
                         </div>
 
                         <div className="form-group">
@@ -192,7 +198,7 @@ export default function FormOpencell() {
                         </div>
                     </div>
 
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'var(--spacing-lg)', borderTop: '1px solid rgba(0,0,0,0.05)', paddingTop: 'var(--spacing-lg)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'var(--space-lg)', borderTop: '1px solid var(--surface-border)', paddingTop: 'var(--space-lg)' }}>
                         <button type="submit" className="btn-primary" style={{ padding: '16px 36px', fontSize: '16px' }}>
                             <Save size={20} />
                             Processar Vistoria

@@ -1,48 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;800&display=swap');
+@import './styles/tokens.css';
 
 :root {
-  /* Ultra Premium Palette - Mscaju Smart Center / Samsung */
-  --samsung-blue: #1428A0;
-  --samsung-blue-light: #2B45E8;
-  --samsung-blue-glow: rgba(20, 40, 160, 0.3);
-  
-  --dark-bg: #0A0A0E;
-  --dark-surface: #12121A;
-  --dark-border: rgba(255, 255, 255, 0.08);
+  /* Legacy aliases → mapeados para os tokens do Design System */
+  --samsung-blue: var(--color-primary);
+  --samsung-blue-light: var(--color-primary-hover);
+  --samsung-blue-glow: rgba(20, 40, 160, 0.25);
 
-  --gray-900: #111116;
-  --gray-700: #3A3A4A;
-  --gray-500: #75758A;
-  --gray-300: #C2C2D1;
-  --gray-100: #EAECEF; /* Darker grey for body to contrast white cards */
+  --dark-bg: #0A0B0F;
+  --dark-surface: var(--surface-card);
+  --dark-border: var(--surface-border);
+
+  --gray-900: var(--text-primary);
+  --gray-700: #B0B8C4;
+  --gray-500: var(--text-secondary);
+  --gray-300: #4B5563;
+  --gray-100: var(--surface-hover);
   --white: #FFFFFF;
 
-  --status-success: #00C781; 
-  --status-success-bg: rgba(0, 199, 129, 0.15);
-  --status-warning: #FFC107; 
-  --status-warning-bg: rgba(255, 193, 7, 0.15);
-  --status-danger: #FF3333; 
-  --status-danger-bg: rgba(255, 51, 51, 0.15);
+  --status-success: var(--color-success);
+  --status-success-bg: rgba(16, 185, 129, 0.12);
+  --status-warning: var(--color-warning);
+  --status-warning-bg: rgba(245, 158, 11, 0.12);
+  --status-danger: var(--color-danger);
+  --status-danger-bg: rgba(244, 63, 94, 0.12);
 
-  --font-sans: 'Inter', sans-serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
   --font-display: 'Outfit', sans-serif;
 
-  /* Sophisticated Shadows - Made more present to define boundaries */
-  --shadow-sm: 0 6px 16px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.03);
-  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 24px 64px rgba(20, 40, 160, 0.12);
-  --shadow-btn: 0 8px 20px var(--samsung-blue-glow);
-  
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
-  --spacing-2xl: 48px;
+  --shadow-btn: 0 4px 14px var(--samsung-blue-glow);
 
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
+  --spacing-xs: var(--space-xs);
+  --spacing-sm: var(--space-sm);
+  --spacing-md: var(--space-md);
+  --spacing-lg: var(--space-lg);
+  --spacing-xl: var(--space-xl);
+  --spacing-2xl: var(--space-2xl);
 }
 
 * {
@@ -53,33 +46,29 @@
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--gray-100); 
-  background-image: linear-gradient(135deg, #EAECEF 0%, #D8DBE0 100%);
-  color: var(--gray-900);
+  background-color: var(--surface-background);
+  color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
-  position: relative;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   font-weight: 800;
   letter-spacing: -0.03em;
-  color: var(--gray-900);
+  color: var(--text-primary);
 }
 
-/* 
-=========== ULTRA PREMIUM HEADER ===========
-Sleek, dark, inspired by "Customer Service" high-end displays.
-*/
+/* =========== HEADER DARK PREMIUM =========== */
 .header {
   background: var(--dark-bg);
-  border-bottom: 1px solid var(--dark-border);
+  border-bottom: 1px solid var(--surface-border);
   position: sticky;
   top: 0;
   z-index: 100;
-  padding: 20px 0;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  padding: 16px 0;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
 .header-content {
@@ -88,23 +77,23 @@ Sleek, dark, inspired by "Customer Service" high-end displays.
   align-items: center;
 }
 
-/* MSCAJU SMART CENTER BRANDING */
+/* BRAND */
 .brand {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   text-decoration: none;
 }
 
 .brand-logo-box {
-  background: linear-gradient(135deg, var(--samsung-blue) 0%, #000 100%);
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, #0F1F7A 100%);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2), 0 8px 16px rgba(0,0,0,0.5);
+  box-shadow: 0 0 20px rgba(20, 40, 160, 0.4);
   position: relative;
   overflow: hidden;
 }
@@ -113,9 +102,9 @@ Sleek, dark, inspired by "Customer Service" high-end displays.
   content: '';
   position: absolute;
   top: 0; left: -100%; width: 50%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
   transform: skewX(-20deg);
-  animation: shine 5s infinite;
+  animation: shine 4s infinite;
 }
 
 @keyframes shine {
@@ -131,7 +120,7 @@ Sleek, dark, inspired by "Customer Service" high-end displays.
 
 .brand-title {
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 800;
   color: var(--white);
   letter-spacing: -0.02em;
@@ -139,197 +128,224 @@ Sleek, dark, inspired by "Customer Service" high-end displays.
 }
 
 .brand-subtitle {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
-  color: var(--gray-500);
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  margin-top: 4px;
+  margin-top: 3px;
 }
 
-/* Premium Dark Nav */
+/* NAV PILLS */
 .nav-links {
   display: flex;
-  gap: 8px;
-  background: var(--dark-surface);
-  padding: 6px;
-  border-radius: 100px;
-  border: 1px solid var(--dark-border);
+  gap: 4px;
+  background: var(--surface-card);
+  padding: 4px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--surface-border);
 }
 
 .nav-item {
   position: relative;
   font-weight: 600;
   font-size: 13px;
-  color: var(--gray-500);
+  color: var(--text-muted);
   cursor: pointer;
-  padding: 10px 24px;
-  border-radius: 100px;
-  transition: all 0.3s ease;
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-normal);
   z-index: 1;
+  user-select: none;
 }
 
 .nav-item:hover {
-  color: var(--white);
+  color: var(--text-primary);
+  background: var(--surface-hover);
 }
 
 .nav-item.active {
-  color: var(--white);
+  color: #000000;
 }
 
 .nav-item.active::before {
   content: '';
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: var(--samsung-blue);
-  border-radius: 100px;
+  background: var(--color-primary);
+  border-radius: var(--radius-sm);
   z-index: -1;
-  box-shadow: 0 4px 12px var(--samsung-blue-glow);
+  box-shadow: 0 0 16px rgba(20, 40, 160, 0.5);
 }
 
-/* Cards */
+/* =========== CARDS =========== */
 .glass-card {
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-xl);
+  background: var(--surface-card);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
   box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(0,0,0,0.08); /* More visible border */
-  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  border: 1px solid var(--surface-border);
+  transition: var(--transition-normal);
 }
 
 .glass-card:hover {
   box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
-/* Forms */
+/* =========== FORMS =========== */
 .form-group {
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--space-lg);
   display: flex;
   flex-direction: column;
 }
 
 label {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--gray-700);
-  margin-bottom: 8px;
-  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  letter-spacing: 0.08em;
 }
 
 input, select {
   font-family: var(--font-sans);
-  padding: 16px 20px;
-  border: 2px solid #EAECEF;
+  padding: 14px 16px;
+  border: 1px solid var(--surface-border);
   border-radius: var(--radius-sm);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
-  color: var(--gray-900);
-  background-color: #FAFAFC;
-  transition: all 0.3s ease;
+  color: var(--text-primary);
+  background-color: var(--surface-background);
+  transition: var(--transition-fast);
+}
+
+input::placeholder {
+  color: var(--text-muted);
 }
 
 input:hover, select:hover {
-  background-color: #F0F2F5;
-  border-color: #D8DBE0;
+  border-color: var(--text-muted);
+  background-color: var(--surface-hover);
 }
 
 input:focus, select:focus {
   outline: none;
-  background-color: var(--white);
-  border-color: var(--samsung-blue);
-  box-shadow: 0 0 0 4px var(--samsung-blue-glow);
+  background-color: var(--surface-background);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(20, 40, 160, 0.25);
 }
 
-/* Buttons - Fixed heights to align perfectly */
+input:focus-visible, select:focus-visible {
+  box-shadow: 0 0 0 2px var(--surface-background), 0 0 0 4px var(--color-primary);
+}
+
+/* =========== BUTTONS =========== */
 .btn-primary, .btn-secondary, .btn-outline {
-  height: 48px;
-  padding: 0 24px !important;
-  border-radius: 100px;
+  height: 44px;
+  padding: 0 22px !important;
+  border-radius: var(--radius-sm);
   font-weight: 600;
-  font-size: 14px !important;
+  font-size: 13px !important;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  transition: all 0.3s ease;
+  gap: 8px;
+  transition: var(--transition-normal);
+  outline: none;
+  font-family: var(--font-sans);
+  letter-spacing: 0.01em;
+}
+
+.btn-primary:focus-visible, .btn-secondary:focus-visible, .btn-outline:focus-visible {
+  box-shadow: 0 0 0 2px var(--surface-background), 0 0 0 4px var(--color-primary);
+}
+
+.btn-primary:active, .btn-secondary:active, .btn-outline:active {
+  transform: scale(0.97);
 }
 
 .btn-primary {
-  background: var(--samsung-blue);
-  color: var(--white);
+  background: var(--color-primary);
+  color: #FFFFFF;
   border: none;
   box-shadow: var(--shadow-btn);
+  font-weight: 700;
 }
 
 .btn-primary:hover {
-  background: var(--samsung-blue-light);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px var(--samsung-blue-glow);
+  background: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(20, 40, 160, 0.4);
 }
 
 .btn-secondary {
-  background: var(--white);
-  color: var(--gray-900);
-  border: 1px solid var(--gray-300);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  background: var(--surface-card);
+  color: var(--text-primary);
+  border: 1px solid var(--surface-border);
 }
 
 .btn-secondary:hover {
-  border-color: var(--gray-900);
-  background: #FAFAFC;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border-color: var(--color-primary);
+  background: var(--surface-hover);
+  color: var(--color-primary);
 }
 
 .btn-outline {
   background: transparent;
-  color: var(--samsung-blue);
-  border: 2px dashed var(--samsung-blue);
+  color: var(--color-primary);
+  border: 1px dashed rgba(20, 40, 160, 0.4);
 }
 
 .btn-outline:hover {
-  background: rgba(20, 40, 160, 0.05);
+  background: rgba(20, 40, 160, 0.08);
+  border-color: var(--color-primary);
 }
 
-/* Layout */
+/* =========== LAYOUT =========== */
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 var(--spacing-xl);
+  padding: 0 var(--space-xl);
 }
 
 .text-muted {
-  color: var(--gray-500);
+  color: var(--text-secondary);
 }
 
-/* Table */
+/* =========== TABLE =========== */
 .data-table {
   width: 100%;
   border-collapse: collapse;
 }
 
 .data-table th {
-  background: #F4F5F8;
-  color: var(--gray-700);
-  font-size: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-secondary);
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   font-weight: 700;
-  padding: 16px;
+  padding: 14px 16px;
   text-align: left;
-  border-bottom: 2px solid #EAECEF;
+  border-bottom: 1px solid var(--surface-border);
 }
 
 .data-table td {
-  padding: 16px;
+  padding: 14px 16px;
   vertical-align: middle;
-  border-bottom: 1px solid #EAECEF;
-  color: var(--gray-900);
+  border-bottom: 1px solid var(--surface-border);
+  color: var(--text-primary);
   font-weight: 500;
+  font-size: 13px;
+}
+
+.data-table tr {
+  transition: var(--transition-fast);
 }
 
 .data-table tr:hover td {
-  background: #FAFAFC;
+  background: var(--surface-hover);
 }

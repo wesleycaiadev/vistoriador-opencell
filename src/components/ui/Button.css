@@ -1,0 +1,86 @@
+.ui-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans, 'Inter', sans-serif);
+  font-weight: 600;
+  border-radius: var(--radius-sm); /* Sharp corners for pro max look */
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-normal);
+  outline: none;
+  gap: var(--space-sm);
+  letter-spacing: 0.02em;
+}
+
+.ui-button:focus-visible {
+  box-shadow: 0 0 0 2px var(--surface-background), 0 0 0 4px var(--color-primary);
+}
+
+.ui-button:active {
+  transform: scale(0.97); /* Microinteração */
+}
+
+/* Variantes */
+.variant-primary {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  box-shadow: var(--shadow-sm);
+}
+
+.variant-primary:hover {
+  background-color: var(--color-primary-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.variant-secondary {
+  background-color: var(--surface-card);
+  color: var(--text-primary);
+  border: 1px solid var(--surface-border);
+}
+
+.variant-secondary:hover {
+  background-color: var(--surface-hover);
+  border-color: var(--color-primary);
+}
+
+.variant-danger {
+  background-color: var(--color-danger);
+  color: #FFFFFF;
+}
+
+.variant-danger:hover {
+  opacity: 0.9;
+  box-shadow: var(--shadow-sm);
+}
+
+.variant-outline {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--text-muted);
+}
+
+.variant-outline:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background-color: rgba(16, 185, 129, 0.05); /* very subtle emerald tint */
+}
+
+/* Sizes */
+.size-sm {
+  height: 32px;
+  padding: 0 var(--space-md);
+  font-size: var(--font-xs);
+}
+
+.size-md {
+  height: 44px; /* Slightly taller for better touch target but precise */
+  padding: 0 var(--space-lg);
+  font-size: var(--font-sm);
+}
+
+.size-lg {
+  height: 52px;
+  padding: 0 var(--space-xl);
+  font-size: var(--font-md);
+}
