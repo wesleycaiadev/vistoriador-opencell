@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
-import { Monitor, Cpu, Sparkles } from 'lucide-react'
+import { Building2, Moon, Sun } from 'lucide-react'
+import { useNetworkStatus } from './hooks/useNetworkStatus'
+import { useVistoriaStore } from './store/useVistoriaStore'
 import FormOpencell from './components/FormOpencell'
 import Dashboard from './components/Dashboard'
 import Joyride, { STATUS } from 'react-joyride'
@@ -7,14 +9,20 @@ import './App.css'
 
 function App() {
   const [activeTab, setActiveTab] = useState('registro')
-  const [runTutorial, setRunTutorial] = useState(false);
+  const [runTutorial, setRunTutorial] = useState(false)
+  const { isOnline } = useNetworkStatus()
+  const { hydrateFromLegacy } = useVistoriaStore()
 
   useEffect(() => {
-    const isTutorialDone = localStorage.getItem('mscaju_tutorial_done');
+    hydrateFromLegacy()
+  }, [hydrateFromLegacy])
+
+  useEffect(() => {
+    const isTutorialDone = localStorage.getItem('mscaju_tutorial_done')
     if (!isTutorialDone) {
-      setRunTutorial(true);
+      setRunTutorial(true)
     }
-  }, []);
+  }, [])
 
   const steps = [
     {
@@ -22,7 +30,7 @@ function App() {
       placement: 'center',
       content: (
         <div>
-          <h2 style={{ fontSize: '20px', marginBottom: '8px', color: '#1428A0' }}>Bem-vindo ao Vistoriador MSCAJU! 🚀</h2>
+          <h2 style={{ fontSize: '20px', marginBottom: '8px', color: '#1428A0' }}>Bem-vindo ao Samsung Smart Center! 🚀</h2>
           <p style={{ color: '#75758A', fontSize: '14px' }}>
             Este é o novo sistema tático para registro de painéis Opencell em bancada.
             Esqueça as planilhas soltas! Aqui tudo é automático, rápido e seguro.
@@ -58,16 +66,16 @@ function App() {
         </div>
       ),
     }
-  ];
+  ]
 
   const handleJoyrideCallback = (data) => {
-    const { status } = data;
-    const finishedStatuses = [STATUS.FINISHED, STATUS.SKIPPED];
+    const { status } = data
+    const finishedStatuses = [STATUS.FINISHED, STATUS.SKIPPED]
     if (finishedStatuses.includes(status)) {
-      setRunTutorial(false);
-      localStorage.setItem('mscaju_tutorial_done', 'true');
+      setRunTutorial(false)
+      localStorage.setItem('mscaju_tutorial_done', 'true')
     }
-  };
+  }
 
   return (
     <>
@@ -115,28 +123,48 @@ function App() {
           skip: 'Pular',
         }}
       />
+
       <header className="header">
         <div className="container header-content">
-          <div className="brand">
+          <a href="#" className="brand">
             <div className="brand-logo-box">
-              <Cpu size={28} color="white" strokeWidth={1.5} />
+              <Building2 size={24} color="#FFFFFF" />
             </div>
-            <div className="brand-text">
-              <span className="brand-title">MSCAJU</span>
-              <span className="brand-subtitle">Smart Center</span>
+            <div>
+              <h1 style={{ margin: 0, fontSize: '18px', fontWeight: '800', letterSpacing: '-0.5px' }}>SAMSUNG SMART CENTER</h1>
             </div>
-          </div>
+          </a>
+
+          {!isOnline && (
+            <div
+              className="network-badge network-badge--offline"
+              role="status"
+              aria-live="polite"
+              aria-label="Sem conexão, modo rascunho ativo"
+            >
+              <span className="network-badge__dot" aria-hidden="true" />
+              <span className="network-badge__label">Offline (Rascunho)</span>
+            </div>
+          )}
 
           <nav className="nav-links">
             <div
               className={`nav-item joyride-registro ${activeTab === 'registro' ? 'active' : ''}`}
               onClick={() => setActiveTab('registro')}
+              role="tab"
+              tabIndex={0}
+              aria-selected={activeTab === 'registro'}
+              onKeyDown={(e) => e.key === 'Enter' && setActiveTab('registro')}
             >
               Registro
             </div>
             <div
               className={`nav-item joyride-dashboard ${activeTab === 'dashboard' ? 'active' : ''}`}
               onClick={() => setActiveTab('dashboard')}
+              role="tab"
+              tabIndex={0}
+              aria-selected={activeTab === 'dashboard'}
+              onKeyDown={(e) => e.key === 'Enter' && setActiveTab('dashboard')}
             >
               Dashboard Gráfico
             </div>
@@ -144,7 +172,7 @@ function App() {
         </div>
       </header>
 
-      <main className="container" style={{ padding: '48px 0', minHeight: 'calc(100vh - 100px)' }}>
+      <main className="container" style={{ paddingBottom: '48px', paddingTop: '48px', minHeight: 'calc(100vh - 100px)' }}>
         {activeTab === 'registro' && <FormOpencell />}
         {activeTab === 'dashboard' && <Dashboard />}
       </main>

@@ -1,38 +1,52 @@
 /* src/styles/tokens.css */
 
 :root {
-  /* =========================================
-     1. CORES SEMÂNTICAS (Tema Escuro "Pro Max") 
-     ========================================= */
-  
-  /* Cores de Superfície - Fim do glassmorphism, uso de elevação sólida */
-  --surface-background: #0f1115; /* Extremely dark, slightly cool tint */
-  --surface-card: #16181C; /* Elevated surface that stands out against background */
-  --surface-hover: #1F2228;
-  --surface-border: rgba(255, 255, 255, 0.08); /* Subtle crisp border */
+  /* Cores de Superfície - Minimalismo e Alta Leitura (DARK) */
+  --surface-background: #0B0E14; 
+  --surface-card: #151821; 
+  --surface-hover: #1E2330;
+  --surface-border: rgba(255, 255, 255, 0.06); 
+  --surface-input: #0B0E14;
+  --input-border: rgba(255, 255, 255, 0.12);
 
   /* Cores de Texto */
-  --text-primary: #FFFFFF;
-  --text-secondary: #9CA3AF; /* Gray 400 */
-  --text-muted: #6B7280;     /* Gray 500 */
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8; 
+  --text-muted: #475569;     
 
-  /* Cores de Marca / Ação — Samsung Blue (Identidade Visual) */
-  --color-primary: #1428A0;       /* Samsung Blue */
+  /* Cores de Marca / Ação — Samsung Blue Oficial */
+  --color-primary: #1428A0;     
   --color-primary-hover: #2B45E8; 
   --color-primary-active: #0F1F7A;
+  
+  /* Status Semânticos */
+  --color-success: #34D399; /* Emerald 400 */
+  --status-success-bg: rgba(52, 211, 153, 0.15);
+  
+  --color-warning: #FBBF24; /* Amber 400 */
+  --status-warning-bg: rgba(251, 191, 36, 0.15);
+  
+  --color-danger: #F87171; /* Red 400 */
+  --status-danger-bg: rgba(248, 113, 113, 0.15);
+  --color-info: #3B82F6;
 
-  /* Estados e Feedback */
-  --color-success: #10B981;
-  --color-danger: #F43F5E;  /* Rose-ish vivid red */
-  --color-warning: #F59E0B; /* Amber */
-  --color-info:    #3B82F6; /* Standard strict blue if needed for technical info */
+  /* Elementos Base */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
+  
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+  
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
 
-  /* =========================================
-     2. ESCALAS DE ESPAÇAMENTO
-     ========================================= */
+  /* Espaçamentos Legado */
   --space-xs: 0.25rem;  /* 4px */
-  --space-sm: 0.5rem;   /* 8px */
-  --space-md: 1rem;     /* 16px */
   --space-lg: 1.5rem;   /* 24px */
   --space-xl: 2rem;     /* 32px */
   --space-2xl: 3rem;    /* 48px */
